@@ -17,10 +17,8 @@ int main()
 
   // copy rules for order 20 in STL vectors for further use
   vector<double> data;
-
   unsigned int nn = 20;
   data.resize(nn);
-
   copy(Quad1D_10, Quad1D_10+nn, data.begin());
 
   vector<double> nodes(nn/2);
@@ -33,11 +31,10 @@ int main()
   }
 
   double value = 0.0;
-  for(int ii=0; ii<nodes.size(); ++ii){
-    value += weights[ii]*polynom(nodes[ii]);
-  }
+  for(int ii=0; ii<nodes.size(); ++ii) value += weights[ii]*polynom(nodes[ii]);
 
   double exact_value = 34.0/3.0;
-  cout << "The error between exact and computed values is: " << abs(value-exact_value) << endl;
+  cout << "The error between exact and computed values is: "
+  << abs(value-exact_value) << endl;
   return 0;
 }

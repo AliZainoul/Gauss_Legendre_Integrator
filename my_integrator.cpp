@@ -2,22 +2,21 @@
 #include "data_Gauss_Legendre.hpp"
 
 
-typedef double myFuncType (double);
+typedef double func (double);
 
 using namespace std;
 
-double integrator(myFuncType polynom){
+double integrator(func function){
   // ideally adjust the quadrature rule to the polynomial order...
   // size_t number_of_nodes = ceil((polynomial_order+1)/2.0);
   //  later ...
   // copy rules for order 20 in STL vectors for further use*
 
   vector<double> data; //Initialize a vector named data
-
-  unsigned int nn = 20; // nn is the number of elements of the vector
-  data.resize(nn); // resize the vector to "nn" elements
-
-  copy(Quad1D_10, Quad1D_10+nn, data.begin());  // Copy from the first element of the array Quad1D_10 to the "nn"-element into the vector data
+  unsigned int nn = 16; // nn: size of the vector (nbr elements)
+  data.resize(nn); // Resize the vector to "nn" elements
+  // Copy from the first element of the array Quad1D_10 to the "nn"-element into the vector data
+  copy(Quad1D_8, Quad1D_8+nn, data.begin());
 
   vector<double> nodes(nn/2);
   vector<double> weights(nn/2);
@@ -30,6 +29,6 @@ double integrator(myFuncType polynom){
 
   double value = 0.0;
   for(int ii=0; ii<nodes.size(); ++ii)
-  value += weights[ii]*polynom(nodes[ii]);
+  value += weights[ii]*function(nodes[ii]);
   return value;
 }
